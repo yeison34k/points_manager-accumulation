@@ -32,3 +32,4 @@ Resources:
             - Effect: Allow
               Action: dynamodb:PutItem
               Resource: arn:aws:dynamodb:us-west-1:763564070137:table/Point
+              
