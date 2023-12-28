@@ -7,7 +7,7 @@ import (
 	"accumulation/internal/usecase"
 	"context"
 	"encoding/json"
-	"fmt"
+	"time"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -37,6 +37,10 @@ func (h *LambdaHandler) HandleRequest(ctx context.Context, request events.APIGat
 		}, err
 	}
 
+	date := time.Now()
+	d := date.Format("01-02-2006 15:04:05")
+	body.CreateDate = d
+
 	err = h.myApp.HandleRequest(&body)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
@@ -47,7 +51,7 @@ func (h *LambdaHandler) HandleRequest(ctx context.Context, request events.APIGat
 
 	return events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       fmt.Sprint("point: success create"),
+		Body:       "point: success create",
 	}, nil
 }
 

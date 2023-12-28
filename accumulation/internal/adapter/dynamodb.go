@@ -64,7 +64,10 @@ func (r *DynamoDBRepository) CreatePoint(point *domain.Point) error {
 				S: aws.String(point.Name),
 			},
 			"total": {
-				N: aws.String(totalAsString),
+				N: aws.String(point.CreateDate),
+			},
+			"createDate": {
+				S: aws.String(totalAsString),
 			},
 		},
 	}
