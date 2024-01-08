@@ -42,7 +42,7 @@ func (r *DynamoDBRepository) GetPointByID(id string) (*domain.Point, error) {
 
 	point := &domain.Point{
 		ID:   id,
-		Name: aws.StringValue(result.Item["name"].S),
+		User: aws.StringValue(result.Item["user"].S),
 	}
 
 	return point, nil

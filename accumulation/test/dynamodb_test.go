@@ -50,7 +50,7 @@ func TestDynamoDBRepository_GetPointByID(t *testing.T) {
 
 	assert.NoError(t, err)
 	assert.Equal(t, "123", result.ID)
-	assert.Equal(t, "TestPoint", result.Name)
+	assert.Equal(t, "TestUser", result.User)
 }
 
 func TestDynamoDBRepository_CreatePoint(t *testing.T) {
@@ -69,7 +69,6 @@ func TestDynamoDBRepository_CreatePoint(t *testing.T) {
 	err := repo.CreatePoint(&domain.Point{
 		ID:    "123",
 		User:  "TestUser",
-		Name:  "TestPoint",
 		Total: 123.45,
 	})
 
