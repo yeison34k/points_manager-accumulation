@@ -7,7 +7,6 @@ import (
 	"accumulation/internal/usecase"
 	"context"
 	"encoding/json"
-	"log"
 	"time"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -39,12 +38,19 @@ func (h *LambdaHandler) HandleRequest(ctx context.Context, request events.APIGat
 	}
 
 	date := time.Now()
-	d := date.Format("01-02-2006 15:04:05")
-	body.CreateDate = d
+	layout := "01-02-2006 15:04:05"
+	dateTime, err := time.Parse(layout, date.String())
+	if err != nil {
+		return events.APIGatewayProxyResponse{
+			StatusCode: 500,
+			Body:       "Error parsing date-time",
+		}, nil
+	}
+
+	body.CreateDate = dateTime.String()
 
 	err = h.myApp.HandleRequest(&body)
 	if err != nil {
-		log.Fatal(err)
 		return events.APIGatewayProxyResponse{
 			StatusCode: 500,
 			Body:       "Internal Server Error",
