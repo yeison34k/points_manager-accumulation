@@ -39,7 +39,8 @@ func (h *LambdaHandler) HandleRequest(ctx context.Context, request events.APIGat
 
 	date := time.Now()
 	layout := "01-02-2006 15:04:05"
-	dateTime, err := time.Parse(layout, date.String())
+	dateString := date.Format(layout)
+	dateTime, err := time.Parse(layout, dateString)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
 			StatusCode: 500,
