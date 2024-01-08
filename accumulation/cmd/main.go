@@ -7,7 +7,6 @@ import (
 	"accumulation/internal/usecase"
 	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"time"
 
@@ -50,7 +49,7 @@ func (h *LambdaHandler) HandleRequest(ctx context.Context, request events.APIGat
 		}, nil
 	}
 
-	body.CreateDate = fmt.Sprintf("%v", dateTime)
+	body.CreateDate = dateTime.String()
 
 	err = h.myApp.HandleRequest(&body)
 	if err != nil {
