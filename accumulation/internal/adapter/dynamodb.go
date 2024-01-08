@@ -60,9 +60,6 @@ func (r *DynamoDBRepository) CreatePoint(point *domain.Point) error {
 			"user": {
 				S: aws.String(point.User),
 			},
-			"name": {
-				S: aws.String(point.Name),
-			},
 			"total": {
 				N: aws.String(totalAsString),
 			},
