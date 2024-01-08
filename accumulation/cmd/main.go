@@ -7,6 +7,7 @@ import (
 	"accumulation/internal/usecase"
 	"context"
 	"encoding/json"
+	"log"
 	"time"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -52,6 +53,7 @@ func (h *LambdaHandler) HandleRequest(ctx context.Context, request events.APIGat
 
 	err = h.myApp.HandleRequest(&body)
 	if err != nil {
+		log.Fatal(err)
 		return events.APIGatewayProxyResponse{
 			StatusCode: 500,
 			Body:       "Internal Server Error",
